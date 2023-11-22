@@ -1,3 +1,11 @@
+data "google_client_openid_userinfo" "me" {
+}
+
+resource "google_os_login_ssh_public_key" "default" {
+  user = data.google_client_openid_userinfo.me.email
+  key  = file("../ssh/gcp.pub")
+}
+
 resource "google_compute_instance" "kubenode1" {
   boot_disk {
     auto_delete = true
@@ -22,7 +30,12 @@ resource "google_compute_instance" "kubenode1" {
   }
 
   machine_type = "e2-medium"
-  name         = "kubenode1"
+
+  metadata = {
+    enable-oslogin = "true"
+  }
+
+  name = "kubenode1"
 
   network_interface {
     access_config {
@@ -78,7 +91,12 @@ resource "google_compute_instance" "kubenode2" {
   }
 
   machine_type = "e2-medium"
-  name         = "kubenode2"
+
+  metadata = {
+    enable-oslogin = "true"
+  }
+
+  name = "kubenode2"
 
   network_interface {
     access_config {
@@ -134,7 +152,12 @@ resource "google_compute_instance" "kubenode3" {
   }
 
   machine_type = "e2-medium"
-  name         = "kubenode3"
+
+  metadata = {
+    enable-oslogin = "true"
+  }
+
+  name = "kubenode3"
 
   network_interface {
     access_config {
