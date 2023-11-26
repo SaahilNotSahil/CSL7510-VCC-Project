@@ -11,7 +11,17 @@ For knowing more about RAP, refer to https://www.mdpi.com/1424-8220/22/8/2869.
 There are some prerequisites for adding RAP to your cluster. For RAP to work, you need to enable the `userspace` mode. Now, the `userspace` mode is deprecated in Kubernetes v1.23, therefore, we are using [Kubernetes 1.21.10](https://github.com/kubernetes/kubernetes/tree/release-1.21). Also, install [Golang](https://go.dev/doc/install) in your workstation. 
 
 - Create 3 nodes with 1 master node and 2 worker nodes
-  - We have used GCP for creating the instances at different locations and used the provided terraform code for launching the instances
+  - We have used GCP for creating the instances at different locations and used the provided terraform code for launching the instances. To use the terraform commands:
+    ```
+    cd infra/
+    cp tfvars.example terraform.tfvars
+    ```
+  - You need to download a service account key from GCP and set its path in the `gcp_svc_key` variable in the `terraform.tfvars` file. Also, you need to set the the `gcp_project` and `gcp_svc_email` variables in the `terraform.tfvars` file. Then run the following commands:
+    ```
+    terraform init
+    terraform plan
+    terraform apply
+    ```
   - Launch the K8s cluster with [kubeadm](https://v1-24.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/).
 - Now build the `kube-proxy` with the RAP code
   - Go ahead and clone the `release-1.21` being checked out.
