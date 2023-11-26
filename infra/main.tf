@@ -42,7 +42,7 @@ resource "google_compute_instance" "kubenode1" {
       network_tier = "PREMIUM"
     }
 
-    subnetwork = "projects/vcc-course/regions/asia-south2/subnetworks/default"
+    subnetwork = "projects/" + var.gcp_project + "/regions/asia-south2/subnetworks/default"
   }
 
   scheduling {
@@ -103,7 +103,7 @@ resource "google_compute_instance" "kubenode2" {
       network_tier = "PREMIUM"
     }
 
-    subnetwork = "projects/vcc-course/regions/us-west1/subnetworks/default"
+    subnetwork = "projects/" + var.gcp_project + "/regions/us-west1/subnetworks/default"
   }
 
   scheduling {
@@ -164,7 +164,7 @@ resource "google_compute_instance" "kubenode3" {
       network_tier = "PREMIUM"
     }
 
-    subnetwork = "projects/vcc-course/regions/europe-west9/subnetworks/default"
+    subnetwork = "projects/" + var.gcp_project + "/regions/europe-west9/subnetworks/default"
   }
 
   scheduling {
